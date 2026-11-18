@@ -2,9 +2,10 @@
 
 ## 1. Dataset Acquisition and Preparation
 
-The experiments use the Open University Learning Analytics Dataset (OULAD).
+The experiments use the [Open University Learning Analytics Dataset (OULAD)](https://analyse.kmi.open.ac.uk/open-dataset).
 
 The dataset preparation process includes:
+
 - Dataset upload and extraction.
 - Initial inspection of CSV files.
 - Examination of column names and data types.
@@ -16,18 +17,20 @@ The dataset preparation process includes:
 A prediction cohort is constructed using day 28 as the prediction cutoff.
 
 The cohort construction procedure includes:
+
 - Merging student information and registration records.
 - Investigating withdrawal dates and inconsistent records.
 - Excluding students registered after the prediction cutoff.
 - Excluding students who withdrew on or before day 28.
 - Excluding cases with unknown withdrawal timing.
 - Defining the binary target variable:
-  - 1: Eventual withdrawal.
-  - 0: Other final outcomes.
+  - `1`: Eventual withdrawal.
+  - `0`: Other final outcomes.
 
 ## 3. Data Quality Audit
 
 The data quality assessment examines:
+
 - Missing values.
 - Exact duplicate records.
 - Learner coverage.
@@ -39,6 +42,7 @@ The data quality assessment examines:
 Student–VLE interactions are processed to obtain a canonical representation of learner activity.
 
 The processing stage investigates:
+
 - Duplicate interaction records.
 - Learner–resource–day aggregation.
 - Click-count consistency.
@@ -49,6 +53,7 @@ The processing stage investigates:
 Student activity is checked against the prediction cohort and course information.
 
 The validation process examines:
+
 - Student and course matching.
 - Learner coverage.
 - Prediction-window consistency.
@@ -73,12 +78,12 @@ The implementation details, including model configurations, preprocessing operat
 
 The experimental framework considers six configurations:
 
-- A0: Initial baseline experiment.
-- A1: Baseline configuration.
-- A2: Proposed feature representation.
-- A3: Proposed features with Isolation Forest.
-- A4: Proposed features with SMOTE.
-- A5: Proposed features with Isolation Forest and SMOTE.
+- **A0:** Initial baseline experiment.
+- **A1:** Baseline configuration.
+- **A2:** Proposed feature representation.
+- **A3:** Proposed features with Isolation Forest.
+- **A4:** Proposed features with SMOTE.
+- **A5:** Proposed features with Isolation Forest and SMOTE.
 
 The exact implementation of each configuration is documented in the notebook.
 
@@ -101,6 +106,4 @@ The experimental notebook provides the data preparation procedures, feature cons
 
 The `requirements.txt` file specifies the Python dependencies required to reproduce the experiments.
 
-Dataset source:
-
-https://analyse.kmi.open.ac.uk/open-dataset
+**Dataset source:** [OULAD – Open University Learning Analytics Dataset](https://analyse.kmi.open.ac.uk/open-dataset)
