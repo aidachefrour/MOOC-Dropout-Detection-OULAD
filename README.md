@@ -47,7 +47,15 @@ Please refer to the notebook for the exact implementation and experimental setti
 
 ## Requirements
 
-The Python libraries required by the notebook should be installed before execution. A `requirements.txt` file will be provided to specify the dependencies and their versions.
+The experiments were developed using Python in Google Colab.
+
+Install the required Python packages using:
+
+pip install -r requirements.txt
+
+The notebook uses NumPy, Pandas, Matplotlib, Scikit-learn, and imbalanced-learn.
+
+The OULAD dataset must be downloaded separately from its official source.
 
 ## Reproducibility
 
