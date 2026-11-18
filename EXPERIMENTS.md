@@ -1,4 +1,3 @@
-
 # Experimental Configurations and Evaluation Protocol
 
 ## 1. Overview
@@ -9,7 +8,7 @@ All experiments are implemented in the notebook:
 
 `JCOMSS_OULAD_Experiments (3).ipynb`
 
-The experiments are designed to compare alternative feature representations and assess the effects of outlier screening and class-imbalance handling.
+The experiments compare alternative feature representations and assess the effects of outlier screening and class-imbalance handling.
 
 ## 2. Experimental Configurations
 
@@ -52,21 +51,19 @@ This configuration combines Isolation Forest-based outlier screening and SMOTE t
 
 The experiments use a group-aware cross-validation strategy to reduce the risk of learner-level information leakage between training and validation partitions.
 
-The evaluation implementation uses:
+The nested evaluation implementation uses:
 
-- StratifiedGroupKFold for group-aware data partitioning.
+- `StratifiedGroupKFold` for group-aware data partitioning.
 - Student identifiers (`id_student`) as grouping information.
 - Five outer folds for model evaluation.
-- Four inner folds for hyperparameter and decision-threshold selection in the nested evaluation configurations.
+- Four inner folds for model selection and decision-threshold selection.
 - A fixed random seed of 42 to support reproducibility.
 
-The nested evaluation procedure separates model selection from final performance estimation. Threshold selection is performed using the inner validation process rather than the outer test fold.
+The nested evaluation procedure separates model selection from final performance estimation. Decision-threshold selection is performed using the inner validation process rather than the outer test fold.
 
-## 4. Classification Model
+## 4. Classification Model and Metrics
 
-Random Forest is used as the principal classification algorithm.
-
-The implementation includes median-value imputation for missing numerical feature values. Model parameters and preprocessing operations are specified in the corresponding notebook cells.
+Random Forest is used as the principal classification algorithm. The implementation includes median-value imputation for missing numerical feature values. Exact model parameters and preprocessing operations are specified in the corresponding notebook cells.
 
 The evaluation reports the following performance measures:
 
@@ -83,15 +80,15 @@ Execution time is also recorded to assess computational cost.
 
 Isolation Forest is used to identify potentially anomalous learner interaction profiles.
 
-The principal configuration uses:
+The documented configuration uses:
 
 - Number of estimators: 100
 - Contamination: 0.02
 - Random state: 42
 
-Outlier detection is applied to the training partition in the corresponding cross-validation configurations. Validation and test observations are not removed through this training-stage filtering procedure.
+For the cross-validation experiments, outlier screening is applied within the corresponding training partition. Validation and test observations are not removed by training-stage filtering.
 
-Anomaly detection is treated as a screening operation. An anomalous interaction profile does not necessarily indicate incorrect data or academic failure.
+Outlier detection is treated as a screening operation. An anomalous interaction profile does not necessarily indicate incorrect data, academic failure, or withdrawal.
 
 ## 6. Class-Imbalance Handling
 
@@ -124,3 +121,7 @@ The experimental configurations are intended to provide a controlled comparison 
 Performance differences should be interpreted alongside the class distribution, threshold-selection procedure, and cross-validation design. In particular, improvements in recall should not be considered independently of precision, F1-score, and PR-AUC.
 
 The numerical results reported in the manuscript should be generated from, and checked against, the corresponding experiment outputs in the notebook.
+
+---
+
+**Reproducibility note:** Before treating this document as the definitive experimental specification, verify that the fold structure, model parameters, outlier-screening procedure, and SMOTE settings match the final executable notebook.
